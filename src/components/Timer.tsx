@@ -32,7 +32,7 @@ export default function Timer({
     handleReset,
   } = useTimer(startTime, roundNumber, roundTime, restTime);
 
-  const isFinished = !isRunning && completedRounds > 0 && isPaused;
+  const isFinished = !isRunning && completedRounds > 0 && !isPaused;
 
   let phase: string;
   let bgColor: String;
