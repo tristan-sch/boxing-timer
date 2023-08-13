@@ -10,6 +10,7 @@ export default function useTimer(
 ) {
   const [timeRemaining, setTimeRemaining] = useState(startTime); // Initial time in seconds
   const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isRoundPhase, setIsRoundPhase] = useState<boolean>(false);
   const [isRestPhase, setIsRestPhase] = useState<boolean>(false);
   const [completedRounds, setCompletedRounds] = useState<number>(0);
@@ -95,6 +96,7 @@ export default function useTimer(
 
   const handleTogglePause = () => {
     setIsRunning(!isRunning);
+    setIsPaused(true);
   };
 
   const handleReset = () => {
@@ -111,6 +113,7 @@ export default function useTimer(
     handleTogglePause,
     handleReset,
     isRunning,
+    isPaused,
     isRoundPhase,
     isRestPhase,
     completedRounds,
