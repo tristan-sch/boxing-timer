@@ -21,7 +21,6 @@ export default function Timer({
     minutes,
     seconds,
     isRunning,
-    isPaused,
     isRoundPhase,
     isRestPhase,
     completedRounds,
@@ -32,7 +31,8 @@ export default function Timer({
     handleReset,
   } = useTimer(startTime, roundNumber, roundTime, restTime);
 
-  const isFinished = !isRunning && completedRounds > 0 && !isPaused;
+  const isFinished =
+    !isRunning && completedRounds > 0 && !isRoundPhase && !isRestPhase;
 
   let phase: string;
   let bgColor: String;
@@ -68,14 +68,14 @@ export default function Timer({
       <div className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow">
         <h3 className="mt-6 text-sm font-medium text-gray-900">{`Round ${completedRounds}/${roundNumber}`}</h3>
         <div className="flex flex-1 flex-col p-6 text-indigo-600 ">
-          {!isFinished ? (
+          {isFinished ? (
+            <span className="text-5xl">Vel gert!</span>
+          ) : (
             <span className="text-7xl">
               {`${minutes.toString().padStart(2, "0")}:${seconds
                 .toString()
                 .padStart(2, "0")}`}
             </span>
-          ) : (
-            <span className="text-5xl">Vel gert!</span>
           )}
 
           <h3 className="mt-6 text-sm font-medium text-gray-900">{phase}</h3>
