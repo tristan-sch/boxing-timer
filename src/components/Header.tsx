@@ -8,9 +8,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { Dialog } from "@headlessui/react";
 
-export default function Header() {
+type Props = {
+  onSoundIconClick: () => void;
+  isSoundActive: boolean;
+};
+
+export default function Header({ isSoundActive, onSoundIconClick }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isSoundActive, setIsSoundActive] = useState(true);
 
   return (
     <>
@@ -33,7 +37,7 @@ export default function Header() {
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setIsSoundActive(!isSoundActive)}
+            onClick={onSoundIconClick}
           >
             <span className="sr-only">Turn off sound</span>
             {isSoundActive ? (
@@ -72,7 +76,7 @@ export default function Header() {
               </div>
               <div className="flex flex-1 justify-end">Info about App</div>
             </div>
-            <div className="mt-6 space-y-2">TBC</div>
+            <div className="mt-6 space-y-2">App du chef tavu</div>
           </Dialog.Panel>
         </Dialog>
       </header>

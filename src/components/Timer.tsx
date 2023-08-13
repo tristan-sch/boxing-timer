@@ -7,6 +7,7 @@ type Props = {
   roundNumber: number;
   roundTime: number;
   restTime: number;
+  isSoundActive: boolean;
 };
 
 export default function Timer({
@@ -14,6 +15,7 @@ export default function Timer({
   roundNumber,
   roundTime,
   restTime,
+  isSoundActive,
 }: Props) {
   const {
     minutes,
@@ -49,10 +51,20 @@ export default function Timer({
   }
 
   return (
-    <div className={`${bgColor} px-4 py-8`}>
-      <audio ref={audioRoundRef} src="/assets/muayThai.mp3" loop />
-      <audio ref={audioBeepRef} src="/assets/beep.mp3" />
-      <audio ref={audioBell3Ref} src="/assets/bell3.mp3" />
+    <div className={`${bgColor} px-10  py-8`}>
+      <audio
+        ref={audioRoundRef}
+        src="/assets/muayThai.mp3"
+        loop
+        muted={!isSoundActive}
+      />
+      <audio ref={audioBeepRef} src="/assets/beep.mp3" muted={!isSoundActive} />
+      <audio
+        ref={audioBell3Ref}
+        src="/assets/bell3.mp3"
+        muted={!isSoundActive}
+      />
+
       <div className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow">
         <h3 className="mt-6 text-sm font-medium text-gray-900">{`Round ${completedRounds}/${roundNumber}`}</h3>
         <div className="flex flex-1 flex-col p-6 text-indigo-600 ">

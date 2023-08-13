@@ -1,7 +1,6 @@
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import Button from "./Button";
 import { formatTime } from "utils/helpers";
-import { SpeakerWaveIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   label: string;
@@ -48,7 +47,6 @@ export default function SettingsRow({
           className="inline-flex items-center justify-center whitespace-nowrap rounded-md p-2.5 text-gray-700"
         >
           <span className="sr-only">Turn off sound</span>
-
           <EllipsisVerticalIcon className="h-6 w-6" aria-hidden="true" />
         </button>
       </td>

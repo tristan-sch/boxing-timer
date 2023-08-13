@@ -6,6 +6,11 @@ import Settings from "components/Settings";
 import Timer from "components/Timer";
 
 export default function Home() {
+  const [isSoundActive, setIsSoundActive] = useState(true);
+  const handleSoundToggle = () => {
+    setIsSoundActive(!isSoundActive);
+  };
+
   const [startTime, setStartTime] = useState(5);
 
   const [roundNumber, setRoundNumber] = useState(3);
@@ -45,13 +50,17 @@ export default function Home() {
         {/* <link rel="icon" href="/" /> */}
         <meta name="description" content="Timer app for boxing" />
       </Head>
-      <Header />
+      <Header
+        isSoundActive={isSoundActive}
+        onSoundIconClick={handleSoundToggle}
+      />
       <main>
         <Timer
           startTime={startTime}
           roundNumber={roundNumber}
           roundTime={roundTime}
           restTime={restTime}
+          isSoundActive={isSoundActive}
         />
         <Settings
           roundNumber={roundNumber}
