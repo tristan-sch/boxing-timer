@@ -41,7 +41,10 @@ export default function Header({ isSoundActive, onSoundIconClick }: Props) {
           >
             <span className="sr-only">Turn off sound</span>
             {isSoundActive ? (
-              <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
+              <SpeakerWaveIcon
+                className="h-6 w-6 dark:text-white"
+                aria-hidden="true"
+              />
             ) : (
               <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
             )}
@@ -49,7 +52,7 @@ export default function Header({ isSoundActive, onSoundIconClick }: Props) {
           <div className="flex flex-1 justify-end">
             <Link
               href="#"
-              className="text-sm font-semibold leading-6 text-indigo-600"
+              className="text-sm font-semibold leading-6 text-indigo-600 dark:text-gray-100"
             >
               Muay Thai
             </Link>

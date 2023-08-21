@@ -38,12 +38,6 @@ module.exports = {
       borderRadius: {
         "4xl": "2rem",
       },
-      fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        display: ["Lexend", ...defaultTheme.fontFamily.sans],
-        nunito: ["Nunito", ...defaultTheme.fontFamily.sans],
-        openSans: ["Open Sans", ...defaultTheme.fontFamily.sans],
-      },
       maxWidth: {
         "2xl": "40rem",
       },

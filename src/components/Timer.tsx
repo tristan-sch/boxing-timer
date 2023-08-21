@@ -51,7 +51,7 @@ export default function Timer({
   }
 
   return (
-    <div className={`${bgColor} px-10  py-8`}>
+    <div className={`${bgColor} px-10 py-8`}>
       <audio
         ref={audioRoundRef}
         src="/assets/muayThai.mp3"
@@ -67,7 +67,7 @@ export default function Timer({
 
       <div className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow">
         <h3 className="mt-6 text-sm font-medium text-gray-900">{`Round ${completedRounds}/${roundNumber}`}</h3>
-        <div className="flex flex-1 flex-col p-6 text-indigo-600 ">
+        <div className="flex flex-1 flex-col p-6 text-indigo-600 dark:text-gray-100">
           {isFinished ? (
             <span className="text-5xl">Vel gert!</span>
           ) : (
@@ -89,12 +89,12 @@ export default function Timer({
               >
                 {!isRunning ? (
                   <PlayIcon
-                    className="h-4 w-4 text-gray-400"
+                    className="h-4 w-4 text-gray-400 dark:text-indigo-400"
                     aria-hidden="true"
                   />
                 ) : (
                   <PauseIcon
-                    className="h-4 w-4 text-gray-400"
+                    className="h-4 w-4 text-gray-400 dark:text-indigo-400"
                     aria-hidden="true"
                   />
                 )}
@@ -107,7 +107,7 @@ export default function Timer({
                 className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border py-4 text-xs font-semibold text-gray-900"
               >
                 <StopIcon
-                  className="h-4 w-4 text-gray-400"
+                  className="h-4 w-4 text-gray-400 dark:text-indigo-400"
                   aria-hidden="true"
                 />
                 Reset

@@ -14,33 +14,18 @@ export default function Home() {
   const [startTime, setStartTime] = useState(5);
 
   const [roundNumber, setRoundNumber] = useState(3);
-  const handleDecreaseRound = (newRoundNumber: number) => {
-    if (newRoundNumber > 1) {
-      setRoundNumber(newRoundNumber - 1);
-    }
-  };
-  const handleIncreaseRound = (newRoundNumber: number) => {
-    setRoundNumber(newRoundNumber + 1);
+  const handleChangeRound = (newRoundNumber: number) => {
+    setRoundNumber(newRoundNumber);
   };
 
   const [roundTime, setRoundTime] = useState(180);
-  const handleDecreaseRoundTime = (newRoundTime: number) => {
-    if (newRoundTime > 30) {
-      setRoundTime(newRoundTime - 30);
-    }
-  };
-  const handleIncreaseRoundTime = (newRoundTime: number) => {
-    setRoundTime(newRoundTime + 30);
+  const handleChangeRoundTime = (newRoundTime: number) => {
+    setRoundTime(newRoundTime);
   };
 
   const [restTime, setRestTime] = useState(60);
-  const handleDecreaseRestTime = (newRestTime: number) => {
-    if (newRestTime > 30) {
-      setRestTime(newRestTime - 30);
-    }
-  };
-  const handleIncreaseRestTime = (newRestTime: number) => {
-    setRestTime(newRestTime + 30);
+  const handleChangeRestTime = (newRestTime: number) => {
+    setRestTime(newRestTime);
   };
 
   return (
@@ -64,14 +49,11 @@ export default function Home() {
         />
         <Settings
           roundNumber={roundNumber}
-          onDecreaseRound={handleDecreaseRound}
-          onIncreaseRound={handleIncreaseRound}
+          onChangeRound={handleChangeRound}
           roundTime={roundTime}
-          onDecreaseRoundTime={handleDecreaseRoundTime}
-          onIncreaseRoundTime={handleIncreaseRoundTime}
+          onChangeRoundTime={handleChangeRoundTime}
           restTime={restTime}
-          onDecreaseRestTime={handleDecreaseRestTime}
-          onIncreaseRestTime={handleIncreaseRestTime}
+          onChangeRestTime={handleChangeRestTime}
         />
       </main>
     </>
