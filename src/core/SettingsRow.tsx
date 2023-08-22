@@ -49,7 +49,8 @@ export default function SettingsRow({
       <td className="whitespace-nowrap py-4 pl-2 pr-4 text-center text-base font-medium text-gray-800">
         {label}
       </td>
-      <td className="whitespace-nowrap py-4 text-base font-bold text-indigo-600 dark:text-gray-100">
+      {/* <td className="whitespace-nowrap py-4 text-base font-bold text-indigo-600 dark:text-gray-100"> */}
+      <td className="whitespace-nowrap py-4 text-base font-bold text-indigo-600">
         <label htmlFor={label} className="sr-only">
           {label}
         </label>

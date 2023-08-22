@@ -46,16 +46,10 @@ export function timeType(type?: string): boolean {
   return type === "time";
 }
 
-export function toggleAudioPlayback(
-  audioRef: HTMLAudioElement | null,
-  shouldPlay: boolean
-) {
-  if (audioRef) {
-    if (shouldPlay) {
-      audioRef.currentTime = 0; // Reset playback position
-      audioRef.play();
-    } else {
-      audioRef.pause();
-    }
-  }
+export function playAudio(audioRef: React.RefObject<HTMLAudioElement> | null) {
+  audioRef?.current?.play();
+}
+
+export function pauseAudio(audioRef: React.RefObject<HTMLAudioElement> | null) {
+  audioRef?.current?.pause();
 }

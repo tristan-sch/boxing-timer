@@ -1,7 +1,6 @@
 "use client";
-
 import { useState, useEffect, useRef } from "react";
-import { toggleAudioPlayback } from "utils/helpers";
+import { pauseAudio, playAudio } from "utils/helpers";
 
 export default function useTimer(
   startTime: number,
@@ -25,29 +24,6 @@ export default function useTimer(
   const audioBeepRef = useRef<HTMLAudioElement | null>(null);
   const audioBell3Ref = useRef<HTMLAudioElement | null>(null);
 
-  // audioRoundRef.current && isRunning && isRoundPhase
-  //   ? audioRoundRef?.current.play()
-  //   : audioRoundRef?.current?.pause();
-
-  // audioBeepRef.current && isRunning && !isRoundPhase && !isRestPhase
-  //   ? audioBeepRef?.current.play()
-  //   : audioBeepRef?.current?.pause();
-
-  //To sound the bell 10 seconds before the end of the round
-  // if (
-  //   audioBell3Ref.current &&
-  //   isRunning &&
-  //   isRoundPhase &&
-  //   timeRemaining === 11
-  // ) {
-  //   audioBell3Ref?.current.play();
-  // }
-
-  //To sound the bell at the beginning and the end of the rounds
-  if (audioBell3Ref.current && timeRemaining === 1) {
-    audioBell3Ref?.current.play();
-  }
-
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
     if (completedRounds < roundNumber + 1) {
@@ -55,45 +31,58 @@ export default function useTimer(
         interval = setInterval(() => {
           setTimeRemaining((prevTimer) => prevTimer - 1);
         }, 1000);
+
+        /* ***SOUND*** */
+        if (isRoundPhase) {
+          //To play the muay thai music during the round
+          // playAudio(audioRoundRef);
+          if (timeRemaining === 11) {
+            //To sound the bell 10 seconds before the end of the round
+            playAudio(audioBell3Ref);
+          }
+        }
+        if (isRestPhase) {
+          //To stop the muay thai music during the rest time
+          // pauseAudio(audioRoundRef);
+          if (timeRemaining < 6) {
+            //To play the beep before the round begins
+            playAudio(audioBeepRef);
+          }
+        }
+        if (!isRoundPhase && !isRestPhase) {
+          //To play the beep before the round begins
+          playAudio(audioBeepRef);
+        }
+        if (timeRemaining === 1) {
+          //To sound the bell at the beginning and the end of the rounds
+          playAudio(audioBell3Ref);
+        }
+
+        /* ***TIME*** */
+        if (timeRemaining === 0) {
+          //To sound the bell 10 seconds before the end of the round
+          if (isRoundPhase) {
+            setIsRoundPhase(false);
+            setIsRestPhase(true);
+            setTimeRemaining(restTime);
+          } else {
+            setIsRoundPhase(true);
+            setIsRestPhase(false);
+            setTimeRemaining(roundTime);
+            setCompletedRounds((prevRounds) => prevRounds + 1);
+          }
+          if (completedRounds === roundNumber) {
+            setIsRunning(false);
+            setIsRoundPhase(false);
+            setIsRestPhase(false);
+            setTimeRemaining(0);
+            // pauseAudio(audioRoundRef);
+          }
+        }
       } else {
         clearInterval(interval);
       }
-
-      if (isRunning && timeRemaining === 0) {
-        if (isRoundPhase) {
-          setIsRoundPhase(false);
-          setIsRestPhase(true);
-          setTimeRemaining(restTime);
-        } else {
-          setIsRoundPhase(true);
-          setIsRestPhase(false);
-          setTimeRemaining(roundTime);
-          setCompletedRounds((prevRounds) => prevRounds + 1);
-        }
-      }
-
-      if (isRunning && timeRemaining === 0 && completedRounds === roundNumber) {
-        setIsRunning(false);
-        setIsRoundPhase(false);
-        setIsRestPhase(false);
-        setTimeRemaining(0);
-      }
     }
-
-    //To play the beep at the start
-    toggleAudioPlayback(
-      audioBeepRef.current,
-      isRunning && !isRoundPhase && !isRestPhase
-    );
-    //To play the music during the round
-    toggleAudioPlayback(audioRoundRef.current, isRunning && isRoundPhase);
-    //To sound the bell at the beginning and the end of the rounds
-    toggleAudioPlayback(audioBell3Ref.current, timeRemaining === 1);
-    //To sound the bell 10 seconds before the end of the round
-    toggleAudioPlayback(
-      audioBell3Ref.current,
-      isRunning && isRoundPhase && timeRemaining === 11
-    );
 
     return () => {
       clearInterval(interval);

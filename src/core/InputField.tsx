@@ -46,7 +46,8 @@ export default function InputField({
           }
         }
       }}
-      className="block w-20 whitespace-nowrap rounded-md border-0 py-1.5 text-center text-base font-bold text-indigo-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-indigo-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:text-gray-100 placeholder:dark:text-gray-100"
+      // className="block w-20 whitespace-nowrap rounded-md border-0 py-1.5 text-center text-base font-bold text-indigo-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-indigo-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:text-gray-100 placeholder:dark:text-gray-100"
+      className="block w-20 whitespace-nowrap rounded-md border-0 py-1.5 text-center text-base font-bold text-indigo-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-indigo-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
       value={formattedValue}
     />
   );

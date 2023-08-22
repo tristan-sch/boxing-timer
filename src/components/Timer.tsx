@@ -67,7 +67,8 @@ export default function Timer({
 
       <div className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow">
         <h3 className="mt-6 text-sm font-medium text-gray-900">{`Round ${completedRounds}/${roundNumber}`}</h3>
-        <div className="flex flex-1 flex-col p-6 text-indigo-600 dark:text-gray-100">
+        {/* <div className="flex flex-1 flex-col p-6 text-indigo-600 dark:text-gray-100"> */}
+        <div className="flex flex-1 flex-col p-6 text-indigo-600">
           {isFinished ? (
             <span className="text-5xl">Vel gert!</span>
           ) : (
