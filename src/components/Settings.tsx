@@ -3,11 +3,11 @@ import SettingsRow from "core/SettingsRow";
 
 type Props = {
   roundNumber: number;
-  onChangeRound: (value: number | string) => void;
+  onChangeRound: (value: number) => void;
   roundTime: number;
-  onChangeRoundTime: (value: number | string) => void;
+  onChangeRoundTime: (value: number) => void;
   restTime: number;
-  onChangeRestTime: (value: number | string) => void;
+  onChangeRestTime: (value: number) => void;
 };
 
 export default function Settings({
