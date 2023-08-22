@@ -1,3 +1,4 @@
+"use client";
 export function getTrimmedNumber(number = "") {
   const trimmedNumber = number.trim().replace(/[^\d]/g, "");
   return trimmedNumber;
@@ -17,8 +18,14 @@ export function formatTime(seconds: number): string {
   return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-export const parseTimeInput = (inputValue: string, value: number) => {
-  const [minutesStr, secondsStr] = inputValue.split(":");
+export function timeToSeconds(timeString: string) {
+  const [minutes, seconds] = timeString.split(":").map(Number);
+  const totalSeconds = minutes * 60 + seconds;
+  return totalSeconds;
+}
+
+export function parseTimeInput(inputValue: number) {
+  const [minutesStr, secondsStr] = inputValue.toString().split(":");
   const minutes = parseInt(minutesStr);
   const seconds = parseInt(secondsStr);
 
@@ -32,5 +39,23 @@ export const parseTimeInput = (inputValue: string, value: number) => {
     return minutes * 60 + seconds;
   }
 
-  return value; // Return the original value if parsing fails
-};
+  return inputValue; // Return the original value if parsing fails
+}
+
+export function timeType(type?: string): boolean {
+  return type === "time";
+}
+
+export function toggleAudioPlayback(
+  audioRef: HTMLAudioElement | null,
+  shouldPlay: boolean
+) {
+  if (audioRef) {
+    if (shouldPlay) {
+      audioRef.currentTime = 0; // Reset playback position
+      audioRef.play();
+    } else {
+      audioRef.pause();
+    }
+  }
+}

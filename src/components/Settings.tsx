@@ -3,11 +3,11 @@ import SettingsRow from "core/SettingsRow";
 
 type Props = {
   roundNumber: number;
-  onChangeRound: (value: number) => void;
+  onChangeRound: (value: number | string) => void;
   roundTime: number;
-  onChangeRoundTime: (value: number) => void;
+  onChangeRoundTime: (value: number | string) => void;
   restTime: number;
-  onChangeRestTime: (value: number) => void;
+  onChangeRestTime: (value: number | string) => void;
 };
 
 export default function Settings({
@@ -21,14 +21,13 @@ export default function Settings({
   return (
     <div className="px-10 py-4">
       <div className="flow-root">
-        {/* <div className="overflow-x-auto"> */}
         <div className="inline-block min-w-full py-2 align-middle">
           <table className="min-w-full divide-y divide-gray-300">
             <tbody className="divide-y divide-gray-200">
               <SettingsRow
                 label="Rounds"
                 interval={1}
-                value={roundNumber}
+                initialValue={roundNumber}
                 onChangeValue={onChangeRound}
               />
               <SettingsRow
@@ -36,7 +35,7 @@ export default function Settings({
                 type="time"
                 interval={30}
                 isFormattedTime
-                value={roundTime}
+                initialValue={roundTime}
                 onChangeValue={onChangeRoundTime}
               />
               <SettingsRow
@@ -44,13 +43,12 @@ export default function Settings({
                 type="time"
                 interval={30}
                 isFormattedTime
-                value={restTime}
+                initialValue={restTime}
                 onChangeValue={onChangeRestTime}
               />
             </tbody>
           </table>
         </div>
-        {/* </div> */}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { toggleAudioPlayback } from "utils/helpers";
 
 export default function useTimer(
   startTime: number,
@@ -24,23 +25,23 @@ export default function useTimer(
   const audioBeepRef = useRef<HTMLAudioElement | null>(null);
   const audioBell3Ref = useRef<HTMLAudioElement | null>(null);
 
-  audioRoundRef.current && isRunning && isRoundPhase
-    ? audioRoundRef?.current.play()
-    : audioRoundRef?.current?.pause();
+  // audioRoundRef.current && isRunning && isRoundPhase
+  //   ? audioRoundRef?.current.play()
+  //   : audioRoundRef?.current?.pause();
 
-  audioBeepRef.current && isRunning && !isRoundPhase && !isRestPhase
-    ? audioBeepRef?.current.play()
-    : audioBeepRef?.current?.pause();
+  // audioBeepRef.current && isRunning && !isRoundPhase && !isRestPhase
+  //   ? audioBeepRef?.current.play()
+  //   : audioBeepRef?.current?.pause();
 
   //To sound the bell 10 seconds before the end of the round
-  if (
-    audioBell3Ref.current &&
-    isRunning &&
-    isRoundPhase &&
-    timeRemaining === 11
-  ) {
-    audioBell3Ref?.current.play();
-  }
+  // if (
+  //   audioBell3Ref.current &&
+  //   isRunning &&
+  //   isRoundPhase &&
+  //   timeRemaining === 11
+  // ) {
+  //   audioBell3Ref?.current.play();
+  // }
 
   //To sound the bell at the beginning and the end of the rounds
   if (audioBell3Ref.current && timeRemaining === 1) {
@@ -78,6 +79,21 @@ export default function useTimer(
         setTimeRemaining(0);
       }
     }
+
+    //To play the beep at the start
+    toggleAudioPlayback(
+      audioBeepRef.current,
+      isRunning && !isRoundPhase && !isRestPhase
+    );
+    //To play the music during the round
+    toggleAudioPlayback(audioRoundRef.current, isRunning && isRoundPhase);
+    //To sound the bell at the beginning and the end of the rounds
+    toggleAudioPlayback(audioBell3Ref.current, timeRemaining === 1);
+    //To sound the bell 10 seconds before the end of the round
+    toggleAudioPlayback(
+      audioBell3Ref.current,
+      isRunning && isRoundPhase && timeRemaining === 11
+    );
 
     return () => {
       clearInterval(interval);
