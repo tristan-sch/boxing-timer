@@ -46,8 +46,16 @@ export function timeType(type?: string): boolean {
   return type === "time";
 }
 
-export function playAudio(audioRef: React.RefObject<HTMLAudioElement> | null) {
-  audioRef?.current?.play();
+export function playAudio(
+  audioRef: React.RefObject<HTMLAudioElement> | null,
+  playbackRate?: number
+) {
+  if (audioRef && audioRef.current && playbackRate) {
+    audioRef.current.playbackRate = playbackRate;
+    audioRef.current.play();
+  } else {
+    audioRef?.current?.play();
+  }
 }
 
 export function pauseAudio(audioRef: React.RefObject<HTMLAudioElement> | null) {

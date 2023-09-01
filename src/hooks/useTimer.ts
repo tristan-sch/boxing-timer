@@ -23,6 +23,8 @@ export default function useTimer(
   const audioRoundRef = useRef<HTMLAudioElement | null>(null);
   const audioBeepRef = useRef<HTMLAudioElement | null>(null);
   const audioBell3Ref = useRef<HTMLAudioElement | null>(null);
+  // const audioCountDown103Ref = useRef<HTMLAudioElement | null>(null);
+  const tripleClapRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
@@ -34,33 +36,35 @@ export default function useTimer(
 
         /* ***SOUND*** */
         if (isRoundPhase) {
-          //To play the muay thai music during the round
+          /* To play the muay thai music during the round */
           // playAudio(audioRoundRef);
-          if (timeRemaining === 11) {
-            //To sound the bell 10 seconds before the end of the round
-            playAudio(audioBell3Ref);
+          if (timeRemaining === 10) {
+            /* To sound the bell 10 seconds before the end of the round */
+            // playAudio(audioBell3Ref);
+            // playAudio(audioCountDown103Ref);
+            playAudio(tripleClapRef);
           }
         }
         if (isRestPhase) {
-          //To stop the muay thai music during the rest time
+          /* To stop the muay thai music during the rest time */
           // pauseAudio(audioRoundRef);
-          if (timeRemaining < 6) {
-            //To play the beep before the round begins
+          if (timeRemaining < 5) {
+            /* To play the beep before the round begins */
             playAudio(audioBeepRef);
           }
         }
         if (!isRoundPhase && !isRestPhase) {
-          //To play the beep before the round begins
+          /* To play the beep before the round begins */
           playAudio(audioBeepRef);
         }
-        if (timeRemaining === 1) {
-          //To sound the bell at the beginning and the end of the rounds
+        if (timeRemaining === 0) {
+          /* To sound the bell at the beginning and the end of the rounds */
           playAudio(audioBell3Ref);
         }
 
         /* ***TIME*** */
         if (timeRemaining === 0) {
-          //To sound the bell 10 seconds before the end of the round
+          /* To sound the bell 10 seconds before the end of the round */
           if (isRoundPhase) {
             setIsRoundPhase(false);
             setIsRestPhase(true);
@@ -108,6 +112,7 @@ export default function useTimer(
     setIsRoundPhase(false);
     setIsRestPhase(false);
     setCompletedRounds(0);
+    // pauseAudio(audioCountDown103Ref);
   };
 
   return {
@@ -123,5 +128,7 @@ export default function useTimer(
     audioRoundRef,
     audioBeepRef,
     audioBell3Ref,
+    // audioCountDown103Ref,
+    tripleClapRef,
   };
 }

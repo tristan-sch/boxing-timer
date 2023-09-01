@@ -27,6 +27,8 @@ export default function Timer({
     audioRoundRef,
     audioBeepRef,
     audioBell3Ref,
+    // audioCountDown103Ref,
+    tripleClapRef,
     handleTogglePause,
     handleReset,
   } = useTimer(startTime, roundNumber, roundTime, restTime);
@@ -52,6 +54,7 @@ export default function Timer({
 
   return (
     <div className={`${bgColor} px-10 py-8`}>
+      {/* TODO: refactor audio */}
       <audio
         ref={audioRoundRef}
         src="/assets/muayThai.mp3"
@@ -62,6 +65,16 @@ export default function Timer({
       <audio
         ref={audioBell3Ref}
         src="/assets/bell3.mp3"
+        muted={!isSoundActive}
+      />
+      {/* <audio
+        ref={audioCountDown103Ref}
+        src="/assets/countDown10.mp3"
+        muted={!isSoundActive}
+      /> */}
+      <audio
+        ref={tripleClapRef}
+        src="/assets/tripleClap.mp3"
         muted={!isSoundActive}
       />
 
