@@ -61,3 +61,20 @@ export function playAudio(
 export function pauseAudio(audioRef: React.RefObject<HTMLAudioElement> | null) {
   audioRef?.current?.pause();
 }
+
+//To go from top to bottom
+// export function calculatePercentage(timeRemaining: number, totalTime: number) {
+//   return ((totalTime - timeRemaining) / totalTime) * 100;
+// }
+
+//To go from bottom to top
+export function calculateRemainingPercentage(
+  timeRemaining: number,
+  totalTime: number
+) {
+  return (
+    ((timeRemaining * 1000) / // Convert seconds to milliseconds
+      (totalTime * 1000)) * // Convert seconds to milliseconds
+    100
+  );
+}

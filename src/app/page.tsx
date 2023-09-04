@@ -11,6 +11,12 @@ export default function Home() {
     setIsSoundActive(!isSoundActive);
   };
 
+  const [isSettingsVisible, setIsSettingsVisible] = useState(true);
+
+  const handleIsSettingsVisible = (isProgressBarRunningFromTimer: boolean) => {
+    setIsSettingsVisible(isProgressBarRunningFromTimer);
+  };
+
   const [startTime, setStartTime] = useState(5);
 
   const [roundNumber, setRoundNumber] = useState(3);
@@ -28,8 +34,10 @@ export default function Home() {
     setRestTime(newRestTime);
   };
 
+  // console.log("isProgressBarRunning:", isProgressBarRunning);
+
   return (
-    <>
+    <div className="h-screen w-screen">
       <Head>
         <title>Boxing-timer</title>
         {/* <link rel="icon" href="/" /> */}
@@ -46,16 +54,20 @@ export default function Home() {
           roundTime={roundTime}
           restTime={restTime}
           isSoundActive={isSoundActive}
+          onIsSettingsVisible={handleIsSettingsVisible}
+          isSettingsVisible={isSettingsVisible}
         />
-        <Settings
-          roundNumber={roundNumber}
-          onChangeRound={handleChangeRound}
-          roundTime={roundTime}
-          onChangeRoundTime={handleChangeRoundTime}
-          restTime={restTime}
-          onChangeRestTime={handleChangeRestTime}
-        />
+        {isSettingsVisible && (
+          <Settings
+            roundNumber={roundNumber}
+            onChangeRound={handleChangeRound}
+            roundTime={roundTime}
+            onChangeRoundTime={handleChangeRoundTime}
+            restTime={restTime}
+            onChangeRestTime={handleChangeRestTime}
+          />
+        )}
       </main>
-    </>
+    </div>
   );
 }

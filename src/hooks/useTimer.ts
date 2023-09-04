@@ -24,6 +24,7 @@ export default function useTimer(
   const audioBeepRef = useRef<HTMLAudioElement | null>(null);
   const audioBell3Ref = useRef<HTMLAudioElement | null>(null);
   // const audioCountDown103Ref = useRef<HTMLAudioElement | null>(null);
+
   const tripleClapRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -118,6 +119,7 @@ export default function useTimer(
   return {
     minutes: Math.floor(timeRemaining / 60),
     seconds: timeRemaining % 60,
+    timeRemaining,
     handleTogglePause,
     handleReset,
     isRunning,
